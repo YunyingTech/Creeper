@@ -1,0 +1,10 @@
+max_thread: 100
+delay: 1
+server-ip: 127.0.0.1
+server-port: 11451
+listen-port: 11451
+max_connection: 128
+config-dir: "./"
+IP-pool: False
+IP-pool-list:
+  - "ip_pool/iplist.txt"

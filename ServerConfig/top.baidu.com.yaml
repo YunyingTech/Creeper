@@ -1,0 +1,7 @@
+name: "百度热搜"
+url: "https://top.baidu.com"
+collections:
+  - name: "热搜榜"
+    xpath: "/html/body/div/div/main/div[1]/div[1]/div[2]"
+    child: "c-single-text-ellipsis"
+    type: 'class'

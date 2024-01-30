@@ -1,0 +1,7 @@
+name: "CSDN"
+url: "https://www.csdn.net"
+collections:
+  - name: "热点"
+    xpath: "/html/body/div[2]/div/div/div/div/div/div/div[2]/div/div[3]/div[1]/div[2]/div[2]/div[2]"
+    type: "class"
+    child: "title"

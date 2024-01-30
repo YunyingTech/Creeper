@@ -1,0 +1,11 @@
+name: "新浪"
+url: "https://www.sina.com.cn"
+collections:
+  - name: "新闻"
+    xpath: "/html/body/div[12]/div[3]/div[3]/div[2]/div[2]/div[2]/div[1]/div[1]/ul[1]"
+    type: "class"
+    child: "linkNewsTopBold"
+  - name: "新闻2"
+    xpath: "/html/body/div[12]/div[3]/div[3]/div[2]/div[2]/div[2]/div[1]/div[1]/ul[1]"
+    type: "tag"
+    child: "a"
