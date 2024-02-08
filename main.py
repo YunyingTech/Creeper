@@ -4,6 +4,7 @@ import Banner
 from Creeper.client import Client
 from Creeper.daemon import Daemon
 from Creeper.server import Server
+from Dashboard.dashboard import Dashboard
 from Logger.Logger import Logger
 import yaml
 import argparse
