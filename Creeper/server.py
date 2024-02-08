@@ -4,7 +4,7 @@ import socket
 import threading
 import time
 import json
-
+from tqdm import tqdm
 from Logger.Logger import Logger
 from Utils.send_encode import send_encode
 
@@ -69,7 +69,7 @@ class Server:
             # 向客户端发送命令
             self.send_command("Transfer File")
 
-# 定义一个处理客户端请求的函数，参数为IP_PORT，client_socket，max_connection
+    # 定义一个处理客户端请求的函数，参数为IP_PORT，client_socket，max_connection
     def handle_client_request(self, IP_PORT, client_socket, max_connection):
         # 定义一个变量，用于记录节点存活时间
         living_time = 0
@@ -111,22 +111,23 @@ class Server:
             # 从living_client中删除断开连接的节点
             self.living_client.pop(f"{IP_PORT[0]}:{IP_PORT[1]}")
 
-# 定义一个函数，用于发送命令
+    # 定义一个函数，用于发送命令
     def send_command(self, command):
-# 如果命令是“Start creeper”，则打印日志信息，并发送命令到所有节点
+        # 如果命令是“Start creeper”，则打印日志信息，并发送命令到所有节点
         if command == "Start creeper":
             logger.info("Send 'Start creeper' to all node")
             commands = {
                 "type": "op",
+                "op": "start",
                 "content": command
             }
             for i in self.living_client:
                 self.living_client[i][1].sendall(send_encode(commands))
-# 如果命令是“Transfer File”，则打印日志信息，并发送文件列表到所有节点
+        # 如果命令是“Transfer File”，则打印日志信息，并发送文件列表到所有节点
         elif command == "Transfer File":
-            logger.info("Send 'Transfer File' to all node")
+            logger.info("Send 'Transfer File' to all node......")
             filelist = os.listdir('ServerConfig')
-            for file in filelist:
+            for file in tqdm(filelist, desc="Sending Files"):
                 commands = {
                     "type": "file",
                     "filename": file,
@@ -134,7 +135,8 @@ class Server:
                 }
                 for i in self.living_client:
                     self.living_client[i][1].sendall(send_encode(commands))
-# 否则，将命令发送到所有节点
+
+        # 否则，将命令发送到所有节点
         else:
             commands = {
                 "type": "other",
