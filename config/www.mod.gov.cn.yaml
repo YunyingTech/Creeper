@@ -1,0 +1,7 @@
+name: "国防部官网权威发布"
+url: "http://www.mod.gov.cn/"
+collections:
+  - name: "权威发布"
+    xpath: "/html/body//div[7]/div[1]/div[2]/div[1]/div[2]/ul/li"
+    type: "target"
+    child: "_blank"

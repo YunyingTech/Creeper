@@ -1,0 +1,5 @@
+name: "中央统战部要闻"
+url: "www.zytzb.gov.cn"
+collections:
+  - name: "要闻"
+    xpath: "/html/body/div[6]/div[2]/div[2]//@title"

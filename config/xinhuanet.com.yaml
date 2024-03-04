@@ -1,0 +1,5 @@
+name: "新华网要闻"
+url: "http://www.xinhuanet.com/"
+collections:
+  - name: "要闻"
+    xpath: "/html/body/div[2]/fjtignoreurl/div[1]/div[1]/div[2]/div//a"

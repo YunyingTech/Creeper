@@ -1,0 +1,5 @@
+name: "搜狐网首页要闻联播"
+url: "www.sohu.com/classic"
+collections:
+  - name: "要闻联播"
+    xpath: "/html/body/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[2]/li/a/@title"

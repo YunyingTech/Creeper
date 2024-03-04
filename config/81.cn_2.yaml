@@ -1,0 +1,7 @@
+name: "中国军网备战"
+url: "http://www.81.cn/bz_208549/index.html"
+collections:
+  - name: "要闻"
+    xpath: "/html/body/div[3]/div[1]/div[2]/div[1]/div[1]/div/div"
+    type: "target"
+    child: "_blank"

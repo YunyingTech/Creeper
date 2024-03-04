@@ -1,0 +1,7 @@
+name: "中国军网要闻"
+url: "http://www.81.cn/yw_208727/index.html"
+collections:
+  - name: "要闻"
+    xpath: "/html/body/div[3]/div[1]/div[2]/div[1]/div[1]"
+    type: "target"
+    child: "_blank"

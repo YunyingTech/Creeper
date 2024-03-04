@@ -1,0 +1,6 @@
+mysql:
+  username: osint
+  password: CBzCapT4w4SSbkbK
+  database: osint
+  port: 23306
+  host: nas.xayytech.com

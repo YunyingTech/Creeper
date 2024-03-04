@@ -1,0 +1,7 @@
+name: "腾讯网热搜"
+url: "https://news.qq.com/"
+collections:
+  - name: "热搜"
+    xpath: "/html/body/div[1]/div[4]/div[3]/div[1]/div[1]/div[1]/ul/li"
+    type: "rel"
+    child: "noreferrer"

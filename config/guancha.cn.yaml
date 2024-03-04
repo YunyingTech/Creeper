@@ -1,0 +1,7 @@
+name: "观察者头条"
+url: "https://www.guancha.cn/GuanChaZheTouTiao/list_1.shtml"
+collections:
+  - name: "头条"
+    xpath: "/html/body/div[2]/div[3]/ul/li//h3"
+    type: "target"
+    child: "_blank"

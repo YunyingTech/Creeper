@@ -1,0 +1,7 @@
+name: "外交部官网要闻"
+url: "www.fmprc.gov.cn"
+collections:
+  - name: "要闻"
+    xpath: "/html/body/div[1]/div[5]/div[5]/ul/li/h3"
+    type: "target"
+    child: "_blank"

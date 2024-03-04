@@ -1,0 +1,5 @@
+name: "中新网热榜"
+url: "https://www.chinanews.com/"
+collections:
+  - name: "热榜"
+    xpath: "/html/body/div[10]/div[2]/div[2]/div[2]/ul/li/a/@title"
