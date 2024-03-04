@@ -11,6 +11,7 @@ import queue
 
 from Logger.Logger import Logger
 from Utils.db_utils import DB
+from Utils.mysql_connector import MysqlConnector
 
 
 class Daemon:
@@ -115,6 +116,7 @@ class Daemon:
         :param url:
         :return:
         """
+        connector = MysqlConnector("./database.yaml")
         self.logger.info("Start crawling pages " + url)
         config = self.url_config[url]
         collection = config["collections"]
@@ -133,11 +135,12 @@ class Daemon:
         collection_count = len(collection)
         collection_point = 0
         while collection_point < collection_count:
+            ret = {
+                'Date': datetime.datetime.now(),
+                'content': [],
+                'url': url
+            }
             try:
-                ret = {
-                    'Date': datetime.datetime.now(),
-                    'content': []
-                }
                 self.logger.info("Thread of " + url + " start collection : " + collection[collection_point]['name'])
                 xpath = collection[collection_point]["xpath"]
                 elem = self.browser.find_element(By.XPATH, xpath)
@@ -164,4 +167,6 @@ class Daemon:
                     self.logger.warn(url + f" has no such element,Retry in {RETRY_COUNT},Skip....")
                     collection_point += 1
                     RETRY_COUNT = 1
-        self.logger.info("Thread of " + url + " has complete,Quit.")
+                self.logger.info("Thread of " + url + " has complete,Quit.")
+                connector.save_result(ret)
+                print(ret)
