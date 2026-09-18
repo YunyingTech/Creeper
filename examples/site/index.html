@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><title>Creeper 本地采集示例</title></head>
+<body>
+  <h1>Creeper 本地采集示例</h1>
+  <label for="keyword">关键词</label><input id="keyword" value="初始值">
+  <button id="reveal" onclick="document.getElementById('delayed').hidden=false">显示更多</button>
+  <ul id="news">
+    <li><a href="/one" target="_blank" rel="noreferrer" title="第一条标题">第一条新闻</a></li>
+    <li><a href="/two" target="_blank" rel="noreferrer" title="O'Reilly 与中文">第二条新闻</a></li>
+  </ul>
+  <p id="delayed" hidden>点击后显示的内容</p>
+  <p class="summary">这是本地测试内容，不依赖外部网站。</p>
+</body>
+</html>

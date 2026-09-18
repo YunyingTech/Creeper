@@ -1,0 +1,83 @@
+name: Publish release
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements-dev.txt build twine
+      - run: ruff check .
+      - run: ruff format --check .
+      - run: python -m pytest -q
+      - name: Verify tag matches all package versions
+        run: |
+          python - <<'PY'
+          import os, pathlib, tomllib
+          versions = {tomllib.loads(p.read_text())['project']['version'] for p in pathlib.Path('packages').glob('*/pyproject.toml')}
+          assert len(versions) == 1, versions
+          ref = os.environ['GITHUB_REF']
+          if ref.startswith('refs/tags/'):
+              assert ref == 'refs/tags/v' + versions.pop(), (ref, versions)
+          PY
+      - run: python scripts/build_release.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: distributions
+          path: dist/
+  publish-pypi:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: build
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: distributions
+          path: dist/
+      - name: Split core and applications for ordered publishing
+        run: |
+          mkdir -p publish-core publish-apps
+          cp dist/yunying_creeper_core-*.whl dist/yunying_creeper_core-*.tar.gz publish-core/
+          cp dist/creeper_client-*.whl dist/creeper_client-*.tar.gz publish-apps/
+          cp dist/creeper_server-*.whl dist/creeper_server-*.tar.gz publish-apps/
+      - name: Publish shared runtime
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: publish-core/
+          skip-existing: true
+      - name: Publish client and server
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: publish-apps/
+          skip-existing: true
+  github-release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: [build, publish-pypi]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: distributions
+          path: dist/
+      - name: Create release and attach distributions
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
+            gh release upload "$GITHUB_REF_NAME" dist/* --clobber
+          else
+            gh release create "$GITHUB_REF_NAME" dist/* --title "Creeper $GITHUB_REF_NAME" --notes-file docs/RELEASE_NOTES.md --verify-tag
+          fi

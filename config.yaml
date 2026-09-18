@@ -1,10 +1,26 @@
-max_thread: 100
+# Paths are relative to this file, not the current working directory.
+max_thread: 2
 delay: 1
+timeout: 15
+page-load-timeout: 45
+max-retries: 3
+headless: true
+config-dir: config
+database-backend: sqlite
+database-path: data/creeper.sqlite3
+mysql-config: database.yaml
 server-ip: 127.0.0.1
 server-port: 11451
+listen-host: 127.0.0.1
 listen-port: 11451
-max_connection: 128
-config-dir: "./"
-IP-pool: False
+max_connection: 16
+server-config-dir: ServerConfig
+received-config-dir: data/received-config
+# Set CREEPER_TOKEN on both server and client when connecting across machines.
+auth-token: ""
+auto-start: false
+dashboard-host: 127.0.0.1
+dashboard-port: 5000
+IP-pool: false
 IP-pool-list:
-  - "ip_pool/iplist.txt"
+  - ip_pool/iplist.txt

@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "creeper-server"
+version = "1.1.0"
+description = "Creeper server: persist and distribute collection jobs to connected workers"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "GPL-3.0-only"
+license-files = ["LICENSE"]
+authors = [{name = "YunyingTech"}]
+dependencies = ["yunying-creeper-core==1.1.0", "Flask>=3,<4"]
+classifiers = ["Programming Language :: Python :: 3", "Operating System :: OS Independent"]
+
+[project.scripts]
+creeper-server = "creeper_server.cli:main"
+
+[project.urls]
+Repository = "https://github.com/YunyingTech/Creeper"
+Issues = "https://github.com/YunyingTech/Creeper/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+creeper_server = ["templates/*.html", "static/*.css", "static/*.js"]

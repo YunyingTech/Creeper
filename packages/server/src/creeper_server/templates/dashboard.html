@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Creeper · 采集结果</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+  <script defer src="{{ url_for('static', filename='dashboard.js') }}"></script>
+</head>
+<body>
+  <header class="topbar"><a href="/" class="brand">Creeper<span>数据采集工作台</span></a><span class="tag">采集结果库</span></header>
+  <main>
+    <div class="heading"><div><p class="eyebrow">COLLECTION ARCHIVE</p><h1>采集结果</h1><p class="subtitle">查看来源、检索内容，追踪每一次采集。</p></div><button id="refresh" type="button">刷新数据</button></div>
+    <dl class="stats"><div><dt>已保存内容</dt><dd id="records">待加载</dd></div><div><dt>来源站点</dt><dd id="sources">待加载</dd></div><div><dt>最近采集</dt><dd id="latest" class="date">暂无记录</dd></div></dl>
+    <section aria-labelledby="results-title">
+      <div class="section-head"><h2 id="results-title">内容明细</h2><form id="search-form" role="search"><label class="sr-only" for="query">搜索内容、来源或栏目</label><input id="query" name="q" type="search" placeholder="搜索内容、来源或栏目" maxlength="500"><button type="submit">搜索</button></form></div>
+      <p id="message" role="status" aria-live="polite">正在读取采集结果…</p>
+      <div class="table-scroll"><table><caption class="sr-only">按最新采集顺序排列的内容</caption><thead><tr><th scope="col">采集内容</th><th scope="col">栏目 / 来源</th><th scope="col">采集时间</th></tr></thead><tbody id="rows"></tbody></table></div>
+      <div class="pagination"><span id="page-info">第 1 页</span><div><button id="previous" type="button" disabled>上一页</button><button id="next" type="button" disabled>下一页</button></div></div>
+    </section>
+    <footer>显示当前数据库中的采集结果。任务完成后，点击「刷新数据」查看最新内容。</footer>
+  </main>
+</body>
+</html>

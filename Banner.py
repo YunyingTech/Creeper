@@ -1,14 +1,10 @@
-import os
+from pathlib import Path
 
 
-def banner(path=""):
-    print("\n", end="")
-    banner = open(os.path.join(path, "banner.txt"), "r", encoding="utf8")
-    banner_text = open(os.path.join(path, "banner_text.txt"), "r", encoding="utf8")
-    for line1, line2 in zip(banner_text.readlines(), banner.readlines()):
-        print("\t" + line1 + "\t" + line2.replace("\n", ""), end="")
-    print("\n\n")
-
-
-if __name__ == "__main__":
-    banner()
+def banner(path=None):
+    directory = Path(path) if path else Path(__file__).resolve().parent
+    with (
+        (directory / "banner.txt").open(encoding="utf-8") as art,
+        (directory / "banner_text.txt").open(encoding="utf-8") as text,
+    ):
+        print("\n" + "\n".join(f"\t{a.rstrip()}\t{b.rstrip()}" for a, b in zip(text, art)) + "\n")

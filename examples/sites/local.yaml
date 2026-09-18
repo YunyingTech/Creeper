@@ -1,0 +1,19 @@
+name: 本地演示
+url: http://127.0.0.1:8000
+pre:
+  - id: 1
+    type: input
+    xpath: "//*[@id='keyword']"
+    text: Creeper
+  - id: 2
+    type: click
+    xpath: "//*[@id='reveal']"
+collections:
+  - name: 新闻标题
+    xpath: "//*[@id='news']"
+    type: tag
+    child: a
+  - name: 链接属性
+    xpath: "//*[@id='news']//a/@title"
+  - name: 交互内容
+    xpath: "//*[@id='delayed']"

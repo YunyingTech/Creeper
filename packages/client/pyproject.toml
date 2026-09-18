@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "creeper-client"
+version = "1.1.0"
+description = "Creeper worker: connect to a server and execute assigned collection tasks"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "GPL-3.0-only"
+license-files = ["LICENSE"]
+authors = [{name = "YunyingTech"}]
+dependencies = ["yunying-creeper-core==1.1.0"]
+classifiers = ["Programming Language :: Python :: 3", "Operating System :: OS Independent"]
+
+[project.scripts]
+creeper-client = "creeper_client.cli:main"
+
+[project.urls]
+Repository = "https://github.com/YunyingTech/Creeper"
+Issues = "https://github.com/YunyingTech/Creeper/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]

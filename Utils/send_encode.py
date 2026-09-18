@@ -1,5 +1,3 @@
-import json
+"""Compatibility import; install the packages before use."""
 
-
-def send_encode(command):
-    return (json.dumps(command) + "\r\n").encode('utf8')
+from creeper_core.protocol import MAX_FRAME_BYTES, JsonConnection, send_encode  # noqa: F401

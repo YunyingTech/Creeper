@@ -1,6 +1,7 @@
+# Optional MySQL backend. Prefer environment variables for credentials.
 mysql:
-  username: osint
-  password: CBzCapT4w4SSbkbK
-  database: osint
-  port: 23306
-  host: nas.xayytech.com
+  username: creeper
+  password: ""
+  database: creeper
+  port: 3306
+  host: 127.0.0.1

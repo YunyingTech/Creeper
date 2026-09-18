@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "yunying-creeper-core"
+version = "1.1.0"
+description = "Shared configuration, Selenium collection, storage and protocol for Creeper"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "GPL-3.0-only"
+license-files = ["LICENSE"]
+authors = [{name = "YunyingTech"}]
+dependencies = ["PyYAML>=6,<7", "selenium>=4.16,<5"]
+classifiers = ["Programming Language :: Python :: 3", "Operating System :: OS Independent"]
+
+[project.optional-dependencies]
+mysql = ["PyMySQL[rsa]>=1.1,<2"]
+
+[project.urls]
+Repository = "https://github.com/YunyingTech/Creeper"
+Issues = "https://github.com/YunyingTech/Creeper/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
