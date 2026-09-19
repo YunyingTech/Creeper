@@ -1,10 +1,12 @@
 # Creeper 1.1.0
 
-Creeper now ships independently installable worker and server packages:
+Creeper now ships independently installable worker and server packages. Download the three wheel files attached to this release into one directory, then install the package needed on each machine:
 
-- `pip install creeper-client` installs the `creeper-client` command.
-- `pip install creeper-server` installs the `creeper-server` command.
+- `pip install --find-links . creeper-client==1.1.0` installs the `creeper-client` command.
+- `pip install --find-links . creeper-server==1.1.0` installs the `creeper-server` command.
 - The shared `yunying-creeper-core` runtime is installed automatically.
+
+PyPI publication is separate from this GitHub Release. The attached wheels can be installed immediately; index-only `pip install` commands require the corresponding packages to be published on PyPI first. Third-party dependencies are resolved from your configured package index.
 
 Servers persist tasks in SQLite and assign one pending job to each idle worker. Workers return results to the server while keeping a local copy. Disconnected leases are retried up to three attempts, and server restarts recover unfinished tasks. Unchanged completed configurations are not automatically repeated; use `--repeat` to request another run. New or modified site configurations are picked up every five seconds.
 

@@ -1,5 +1,6 @@
 import subprocess
 import sys
+import sysconfig
 from pathlib import Path
 
 from creeper_client.cli import main as client_main
@@ -7,7 +8,7 @@ from creeper_server.cli import main as server_main
 
 
 def test_installed_entry_points():
-    executable_dir = Path(sys.executable).parent
+    executable_dir = Path(sysconfig.get_path("scripts"))
     suffix = ".exe" if sys.platform == "win32" else ""
     for name in ("creeper-client", "creeper-server"):
         output = subprocess.run(

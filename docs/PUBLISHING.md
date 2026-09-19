@@ -22,7 +22,7 @@ The workflow is `.github/workflows/release.yml`. Configure three pending publish
 | `creeper-client` | `YunyingTech` | `Creeper` | `release.yml` | `pypi` |
 | `creeper-server` | `YunyingTech` | `Creeper` | `release.yml` | `pypi` |
 
-Create a GitHub environment named `pypi` in the repository. Push the reviewed source and a matching tag:
+Create a GitHub environment named `pypi` in the repository. After configuring all three PyPI publishers, set the repository Actions variable `PYPI_PUBLISH_ENABLED` to `true` to enable PyPI uploads. Without that variable, the workflow publishes only the GitHub Release and attached packages. Push the reviewed source and a matching tag:
 
 ```sh
 git add .
@@ -32,7 +32,7 @@ git push origin HEAD
 git push origin v1.1.0
 ```
 
-The workflow tests and builds the source, publishes the common dependency before the applications, and then creates a GitHub Release containing the artifacts. A failed PyPI publication prevents the release from claiming the package installation is ready. `workflow_dispatch` on a branch only validates and builds; dispatch on a matching tag also publishes.
+The workflow tests and builds the source, optionally publishes the common dependency before the applications, and then creates a GitHub Release containing the artifacts. If PyPI publishing is enabled and fails, the release job waits for that failure to be resolved. If PyPI publishing is disabled, the release still provides directly installable wheels and clearly distinguishes them from PyPI availability. `workflow_dispatch` on a branch only validates and builds; dispatch on a matching tag also publishes.
 
 Reference: https://docs.pypi.org/trusted-publishers/creating-a-project-through-oidc/
 
